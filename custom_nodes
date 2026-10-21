@@ -1,0 +1,11 @@
+# One custom node repository per line, e.g.
+#   https://github.com/kijai/ComfyUI-KJNodes.git
+# Append #<branch-or-tag> to pin a ref:
+#   https://github.com/kijai/ComfyUI-KJNodes.git#v1.20
+# Empty lines and lines starting with # are ignored.
+#
+# Note: ComfyUI-Manager already ships in the base image via
+# manager_requirements.txt (comfyui_manager) - do not list it here.
+
+https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler.git
+https://github.com/kijai/ComfyUI-KJNodes.git
