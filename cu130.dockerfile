@@ -1,0 +1,24 @@
+FROM pytorch/pytorch:2.14.1-cuda13.0-cudnn9-runtime
+
+RUN apt-get update &&\
+    apt-get install -y ffmpeg libsm6 libxext6 python3-venv git &&\
+    apt-get clean
+
+COPY VERSION /VERSION
+
+RUN git clone --depth 1 --branch $(cat /VERSION) https://github.com/Comfy-Org/ComfyUI.git /opt/comfyui
+
+WORKDIR /opt/comfyui
+
+RUN python3 -m pip install -r requirements.txt -r manager_requirements.txt
+
+COPY --chown=root:root --chmod=0755 docker-entrypoint.sh /docker-entrypoint.sh
+
+# ComfyUI startup arguments, override at runtime:
+#   docker run -e CLI_ARGS="--listen 0.0.0.0 --port 8188 --lowvram" ...
+ENV CLI_ARGS="--listen 0.0.0.0 --port 8188"
+
+
+EXPOSE 8188/tcp
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
