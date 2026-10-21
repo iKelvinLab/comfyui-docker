@@ -9,11 +9,11 @@ if [ "${AUTO_INSTALL_CUSTOM_NODES:-0}" = "1" ]; then
         [ -f "$req" ] || continue
         dir="$(dirname "$req")"
         if [ ! -f "$dir/.requirements_installed" ]; then
-            python3 -m pip install -r "$req" && touch "$dir/.requirements_installed"
+            /opt/comfyui/venv/bin/pip3 install -r "$req" && touch "$dir/.requirements_installed"
         fi
     done
 fi
 
 # CLI_ARGS is intentionally unquoted so a full argument list expands
 # into separate arguments, e.g. CLI_ARGS="--listen 0.0.0.0 --port 8188"
-exec python3 main.py ${CLI_ARGS} "$@"
+exec /opt/comfyui/venv/bin/python3 main.py ${CLI_ARGS} "$@"

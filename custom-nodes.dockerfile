@@ -30,7 +30,7 @@ RUN set -eux; \
             git clone --depth 1 --branch "$ref" "$url" "$dir"; \
         fi; \
         if [ -f "$dir/requirements.txt" ]; then \
-            python3 -m pip install -r "$dir/requirements.txt"; \
+            /opt/comfyui/venv/bin/pip3 install -r "$dir/requirements.txt"; \
         fi; \
         touch "$dir/.requirements_installed"; \
     done < /tmp/custom_nodes; \
